@@ -12,6 +12,16 @@
   <% end %>
 
   <div>
+    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.text_field :phone_number, list: 'phone_numbers'%>
+    <datalist id='phone_numbers'>
+      <% User.pluck(:phone_number).each do |phone_number|%>
+        <option value=<%=phone_number%>></option>
+      <%end%>
+  </datalist>
+  </div>
+
+  <div>
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
@@ -19,11 +29,6 @@
   <div>
     <%= form.label :last_name, style: "display: block" %>
     <%= form.text_field :last_name %>
-  </div>
-
-  <div>
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
   </div>
 
   <div>
