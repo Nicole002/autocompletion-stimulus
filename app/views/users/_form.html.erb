@@ -1,4 +1,4 @@
-<%= form_with(model: user) do |form| %>
+<%= form_with(model: user, data: { controller: 'autocompletion' }) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number, list: 'phone_numbers'%>
+    <%= form.text_field :phone_number, list: 'phone_numbers', data: { action: 'input->autocompletion#autocomplete' } %>
     <datalist id='phone_numbers'>
       <% User.pluck(:phone_number).each do |phone_number|%>
         <option value=<%=phone_number%>></option>
@@ -23,17 +23,17 @@
 
   <div>
     <%= form.label :first_name, style: "display: block" %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, data: { autocompletion_target: 'firstName' } %>
   </div>
 
   <div>
     <%= form.label :last_name, style: "display: block" %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, data: { autocompletion_target: 'lastName' } %>
   </div>
 
   <div>
     <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
+    <%= form.text_field :email, data: { autocompletion_target: 'email' } %>
   </div>
 
   <div>

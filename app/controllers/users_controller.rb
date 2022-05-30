@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
+  def autocomplete
+    render json: User.find_by(phone_number: params[:phone_number]).to_json
+  end
+  
   # GET /users or /users.json
   def index
     @users = User.all
